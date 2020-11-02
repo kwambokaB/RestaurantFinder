@@ -1,0 +1,25 @@
+{
+  "name": "restaurantfinderserverside",
+  "version": "1.0.0",
+  "description": "backend for restaurant fnder implemented in postgresql nodejs and express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwambokaB/RestaurantFinder.git"
+  },
+  "author": "kwambokaB",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kwambokaB/RestaurantFinder/issues"
+  },
+  "homepage": "https://github.com/kwambokaB/RestaurantFinder#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  }
+}
