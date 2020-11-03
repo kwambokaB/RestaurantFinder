@@ -1,12 +1,15 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-const db = require('./Db')
+const cors = require('cors');
+const db = require('./Db');
+
 
 const app = express();
 dotenv.config();
 const port = process.env.PORT || 8080;
 
+app.use(cors())
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
