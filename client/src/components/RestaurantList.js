@@ -24,7 +24,8 @@ async function getRestaurants(){
        getRestaurants()
     }, [])
 
-    const handleDelete = async(id) => {
+    const handleDelete = async(e, id) => {
+        e.stopPropagation();
         try{
            const response = await RestaurantFinderApi.delete(`/restaurant/${id}`)
            console.log('delete response' , response)
@@ -38,10 +39,13 @@ async function getRestaurants(){
 
     }
 
-    const handleUpdate = (id) => {
+    const handleUpdate = (e, id) => {
+     e.stopPropagation();
      history.push(`/restaurant/${id}/update`)
     }
-
+    const handleRestaurantSelect = (id) =>{
+        history.push(`/restaurant/${id}`)
+    }
 
     return (
         <div className="list-group">
@@ -59,13 +63,13 @@ async function getRestaurants(){
                   {restaurants ? 
                   restaurants.map(restaurant => {
                       return(
-                          <tr key={restaurant.id}>
+                          <tr key={restaurant.id} onClick={() => handleRestaurantSelect(restaurant.id)}>
                               <td>{restaurant.name}</td>
                               <td>{restaurant.location}</td>
                               <td>{"$".repeat(restaurant.price_range)}</td>
                               <td>Reviews</td>
-                              <td> <button className="btn btn-warning" onClick={() => handleUpdate(restaurant.id)}>Update</button></td>
-                              <td> <button className="btn btn-danger" onClick={() => handleDelete(restaurant.id)}>Delete</button></td>
+                              <td> <button className="btn btn-warning" onClick={(e) => handleUpdate(e, restaurant.id)}>Update</button></td>
+                              <td> <button className="btn btn-danger" onClick={(e) => handleDelete(e, restaurant.id)}>Delete</button></td>
                           </tr>
                       )
 
