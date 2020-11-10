@@ -10,15 +10,15 @@ import { RestaurantContext } from '../context/RestaurantContext';
 export const RestaurantDetails = () => {
     const {id} = useParams();
     const {selectedRestaurant, setSelectedRestaurant} = useContext(RestaurantContext);
-    const reviews = []
 
     const fetchData = async () => {
         try{
             const response = await RestaurantFinderApi.get(`/restaurant/${id}`)
-            console.log('restaurant details response', response)
+            console.log('restaurant details response', response.data.data)
             // selectedRestaurant(response.data.data)
-            setSelectedRestaurant(response.data.data.data)
-            reviews.push()
+            setSelectedRestaurant(response.data.data)
+            
+          
         }
         catch (err) {
             console.log('restaurant details error', err)
@@ -31,14 +31,16 @@ export const RestaurantDetails = () => {
 
     return (
         <div>
-            {selectedRestaurant && (
+
+           {selectedRestaurant && (
               <>
+               <h1 className="text-center display-1">{selectedRestaurant.restaurant.name}</h1> 
               <div className="mt-3">
                   <Review reviews={selectedRestaurant.reviews}/>
               </div>
               <AddReview />
               </>
-            )}
+            )} 
             
         </div>
     )

@@ -5,10 +5,11 @@ const Review = ({reviews}) => {
     console.log(reviews)
     return (
         <div className="row row-cols-3 mb-2">
-       { reviews.length ? 
+       { reviews.length > 0 ?
        reviews.map((rev) => {
           return(
-            <div className="card text-white bg-primary mb-3 mr-4" style={{maxWidth: "30%"}} key={rev.id}>
+            <div className="card text-white bg-primary mb-3 mr-4" 
+            style={{maxWidth: "30%"}} key={rev.id}>
             <div className="card-header d-flex justify-content-between">
                 <span>{rev.name}</span>
                 <span><StarRating rating={rev.rating}/></span>
@@ -18,7 +19,7 @@ const Review = ({reviews}) => {
             </div>
        </div>
           )
-       }) : null}
+       }) : <h1>No reviews yet</h1>}
         </div>
     )
 }

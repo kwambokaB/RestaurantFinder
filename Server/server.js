@@ -93,7 +93,7 @@ app.put('/api/v1/restaurant/:id', async(req, res) => {
     catch(e) {
         console.log(e)
         res.status(500).json({
-            status: ' request failed',
+            status: 'request failed',
             Error: e
         })
     }
@@ -115,13 +115,30 @@ app.delete('/api/v1/restaurant/:id', async (req, res) => {
 
     console.log(e)
     res.status(500).json({
-        status: ' request failed',
+        status: 'request failed',
         Error: e
     })
    }
 });
 
-
+app.post('/api/v1/restaurant/:id/addReview', async(req, res) => {
+    try{
+const addedReview = await db.query('INSERT INTO reviews (restaurant_id, name, review, rating) values ($1, $2, $3, $4) returning *;', [req.params.id, req.body.name, req.body.review, req.body.rating])
+res.status(200).json({
+    status: 'Success',
+    data:{
+        review: addedReview.rows[0]
+    }
+})
+    }
+    catch(err){
+        console.log(err)
+        res.status(400).json({
+            status: 'request failed',
+            Error: err
+        })
+    }
+})
 
 app.listen(port, () => {
     console.log(`server running on port ${port}`);
